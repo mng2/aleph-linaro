@@ -1,0 +1,5 @@
+Misc files related to Linaro (MicroZed).
+
+http://www.commandlinefu.com/commands/view/8435/clone-a-list-of-installed-packages-from-one-debianubuntu-server-to-another
+ssh remotehost 'dpkg --get-selections' | dpkg --set-selections && dselect install
+
