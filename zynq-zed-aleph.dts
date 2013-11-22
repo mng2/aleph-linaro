@@ -1,0 +1,73 @@
+/dts-v1/;
+
+/include/ "zynq.dtsi"
+
+/ {
+	model = "Xilinx Zynq ZED";
+	memory {
+		device_type = "memory";
+		reg = <0x000000000 0x20000000>;
+	};
+
+	chosen {
+//		bootargs = "console=ttyPS0,115200 root=/dev/ram rw initrd=0x1100000,33M ip=:::::eth0:dhcp earlyprintk";
+		bootargs = "console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootfstype=ext4 rootwait devtmpfs.mount=0";
+		linux,stdout-path = "/amba@0/uart@E0001000";
+	};
+
+	counters@62600000 {
+		compatible = "generic-uio";
+		reg = < 0x62600000 0x1000 >;
+		//interrupts = < 0 57 0 >;
+		//interrupt-parent = <&gic>;
+	};
+
+	amba@0 {
+		compatible = "simple-bus";
+		#address-cells = <0x1>;
+		#size-cells = <0x1>;
+		ranges;
+		
+		ps7_i2c_0: ps7-i2c@e0004000 {
+			bus-id = <0>;
+			clocks = <&clkc 38>;
+			compatible = "xlnx,ps7-i2c-1.00.a";
+			i2c-clk = <400000>;
+			interrupt-parent = <&gic>;
+			interrupts = <0 25 4>;
+			reg = <0xe0004000 0x1000>;
+			xlnx,has-interrupt = <0x0>;
+			//xlnx,i2c-reset = "MIO 13";
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			/*rtc@54 {
+				compatible = "nxp,pcf8563";
+				reg = <0x51>;
+			};*/
+		};
+	};
+};
+
+&eth {
+	phy-handle = <&phy0>;
+	phy-mode = "rgmii-id";
+
+	phy0: phy@0 {
+		compatible = "marvell,88e1510";
+		device_type = "ethernet-phy";
+		reg = <0x0>;
+		marvell,reg-init=<3 16 0xff00 0x1e 3 17 0xfff0 0x0a>;
+		//local-mac-address = [00 0a 35 00 00 00];
+	};
+};
+
+/*	leds {
+		compatible = "gpio-leds";
+		ld0 {
+			label = "ld0:red";
+			gpios = <&gpio 73 0>;
+		};
+	};
+*/
+
