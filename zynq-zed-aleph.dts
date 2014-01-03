@@ -68,6 +68,31 @@
 				reg =<0>; //chipselect 0
 				spi-max-frequency= <1000000>;  // 1 MHz
 			};
+			device@1{
+				compatible="linux,spidev";
+				reg =<1>; //chipselect 1
+				spi-max-frequency= <1000000>;  // 1 MHz
+			};
+			device@2{
+				compatible="linux,spidev";
+				reg =<2>; //chipselect 2
+				spi-max-frequency= <1000000>;  // 1 MHz
+			};
+			device@3{
+				compatible="linux,spidev";
+				reg =<3>; //chipselect 3
+				spi-max-frequency= <1000000>;  // 1 MHz
+			};
+			device@4{
+				compatible="linux,spidev";
+				reg =<4>; //chipselect 4
+				spi-max-frequency= <1000000>;  // 1 MHz
+			};
+			device@5{
+				compatible="linux,spidev";
+				reg =<5>; //chipselect 5
+				spi-max-frequency= <1000000>;  // 1 MHz
+			};
 		};
 	};
 };
