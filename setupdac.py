@@ -2,7 +2,8 @@ import spidev
 spi = spidev.SpiDev()
 spi.open(32766,3)
 print "Writing to all config regs per datasheet rec..."
-spi.xfer2([0x00,0x70]) # FIFO single sync source
+#spi.xfer2([0x00,0x00]) # bypass FIFO, no reset sourc
+spi.xfer2([0x00,0x40]) # use FIFO, no reset source
 spi.xfer2([0x01,0x01]) # disable interpolation
 spi.xfer2([0x02,0x00])
 spi.xfer2([0x03,0x10])
