@@ -9,10 +9,12 @@ apt-utils					install
 aspell						install
 aspell-en					install
 at-spi2-core					install
+avahi-daemon					install
 base-files					install
 base-passwd					install
 bash						install
 bc						install
+bind9-host					install
 binutils					install
 bsdmainutils					install
 bsdutils					install
@@ -143,9 +145,11 @@ libaudio2:armhf					install
 libavahi-client3:armhf				install
 libavahi-common-data:armhf			install
 libavahi-common3:armhf				install
+libavahi-core7:armhf				install
 libavcodec53:armhf				install
 libavformat53:armhf				install
 libavutil51:armhf				install
+libbind9-80					install
 libblkid1:armhf					install
 libbluray1:armhf				install
 libbsd0:armhf					install
@@ -170,6 +174,7 @@ libcroco3:armhf					install
 libcups2:armhf					install
 libcupsimage2:armhf				install
 libcurl3-gnutls:armhf				install
+libdaemon0					install
 libdatrie1:armhf				install
 libdb5.1:armhf					install
 libdbus-1-3:armhf				install
@@ -183,6 +188,7 @@ libdirectfb-1.2-9:armhf				install
 libdiscid0:armhf				install
 libdjvulibre-text				install
 libdjvulibre21					install
+libdns81					install
 libdpkg-perl					install
 libdrm-nouveau1a:armhf				install
 libdrm-nouveau2:armhf				install
@@ -227,6 +233,7 @@ libgdk-pixbuf2.0-0:armhf			install
 libgdk-pixbuf2.0-common				install
 libgee2:armhf					install
 libgeis1:armhf					install
+libgeoip1:armhf					install
 libgif4:armhf					install
 libgl1-mesa-dri:armhf				install
 libgl1-mesa-glx:armhf				install
@@ -281,6 +288,9 @@ libimlib2					install
 libimobiledevice3				install
 libindicator3-7					install
 libindicator7					install
+libisc83					install
+libisccc80					install
+libisccfg82					install
 libiw30:armhf					install
 libjack-jackd2-0:armhf				install
 libjasper1:armhf				install
@@ -304,6 +314,7 @@ liblircclient0					install
 liblocale-gettext-perl				install
 libloudmouth1-0					install
 libltdl7:armhf					install
+liblwres80					install
 liblzma5:armhf					install
 libmagic1:armhf					install
 libmenu-cache1					install
@@ -372,6 +383,7 @@ libpthread-stubs0-dev:armhf			install
 libpulse-mainloop-glib0:armhf			install
 libpulse0:armhf					install
 libpwquality1					install
+libpython2.7					install
 libraptor2-0					install
 librasqal3					install
 librdf0						install
@@ -399,6 +411,7 @@ libspectre1:armhf				install
 libspeex1:armhf					install
 libsqlite3-0:armhf				install
 libss2:armhf					install
+libssl-dev					install
 libssl1.0.0:armhf				install
 libstartup-notification0:armhf			install
 libstdc++6:armhf				install
@@ -569,9 +582,11 @@ procps						install
 psmisc						install
 python						install
 python-apt-common				install
+python-dev					install
 python-minimal					install
 python-smbus					install
 python2.7					install
+python2.7-dev					install
 python2.7-minimal				install
 python3						install
 python3-apt					install
