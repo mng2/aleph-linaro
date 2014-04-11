@@ -1,0 +1,5 @@
+0x6260 counter_extdiff
+0x6680 ramp
+0x6fc0 dds compare
+0x7000 counters
+0x7620 dac ddr out
