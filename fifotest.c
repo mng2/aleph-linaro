@@ -12,6 +12,7 @@
 #define REG_STATUS 0x1
 #define REG_READ 0x2
 #define REG_WRITE 0x3
+#define REG_FULL 0x4
 
 void usage(void)
 {
@@ -67,33 +68,40 @@ int main(int argc, char *argv[])
     printf("UIO device: %s\n",uiod);
     printf("Module ID: 0x%08x\n",uiomem[REG_ID]);
 
-    if (!(uiomem[REG_STATUS] & 0x1))
+    if (!(uiomem[REG_STATUS] == 0xfFFFfFFF))
     {
+	i = 0;
         printf("FIFO not empty, emptying...\n");
-        while (!(uiomem[REG_STATUS] & 0x1))
+        while (!(uiomem[REG_STATUS] == 0xfFFFfFFF))
         {
             uiomem[REG_READ] = 0x1;            // initiate read
             while (!((temp = uiomem[REG_READ]) & 0x10)) ; // wait for ack
             uiomem[REG_READ] = 0x0;           // signal read done
             while (uiomem[REG_READ] & 0x10) ; // wait for ack lowering
-            printf("Read: 0x%04x\n",(temp >> 16));
+	    if ((0xFFFF & i) != (temp >> 16)) {
+              printf("Error at 0x%04x: 0x%04x\n",i,(temp >> 16));
+	    }
+	    i++;
         }
     }
 
-    printf("FIFO empty. Writing values to FIFO...\n");
+    printf("FIFO empty. %d values discarded.\n",i);
+    printf("Writing values to FIFO...\n");
 
-    for (i = 0; i < 3000; i++)
+
+    for (i = 0; i < 100000; i++)
     {
-       if (uiomem[REG_STATUS] & 0x10) 
+       if (uiomem[REG_FULL] == 0xfFFFfFFF)
        {
            printf("Info: FIFO is full, %d values written\n",i);
+	   printf("status 0x%08x\n",uiomem[REG_FULL]);
            break;
        }
-        uiomem[REG_WRITE] = (i << 16) | 0x1;            // initiate read
+        uiomem[REG_WRITE] = (i << 16) | 0x1;            // initiate write
         while (!((temp = uiomem[REG_WRITE]) & 0x10)) ; // wait for ack
-        uiomem[REG_WRITE] = 0x0;           // signal read done
+        uiomem[REG_WRITE] = 0x0;           // signal write done
         while (uiomem[REG_WRITE] & 0x10) ; // wait for ack lowering
-        printf("wrote: 0x%04x\n",i);
+        //printf("wrote: 0x%04x\n",i);
     }
 
     printf("\n");
