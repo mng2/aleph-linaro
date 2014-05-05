@@ -2050,4 +2050,3 @@
 0x7fe6 0x802c
 0x7fea 0x8027
 ! FIFO empty. 2048 values read.
-
