@@ -6,8 +6,10 @@ import matplotlib.mlab as mlab
 
 channelA = []
 channelB = []
+channelC = []
+channelD = []
 
-fin = open('term2048.txt','rb')
+fin = open('term2048-4fix.txt','rb')
 
 for line in fin:
   #print lineno
@@ -16,6 +18,8 @@ for line in fin:
   if temp[0] != '!':
     channelA.append(int(temp[0],16)-32768)
     channelB.append(int(temp[1],16)-32768)
+    channelC.append(int(temp[2],16)-32768)
+    channelD.append(int(temp[3],16)-32768)
   
 
 
@@ -27,6 +31,8 @@ ax2 = fig.add_subplot(311)
 
 ax2.plot([a*1000./65535. for a in channelA],color='green')
 ax2.plot([a*1000./65535. for a in channelB],color='blue')
+ax2.plot([a*1000./65535. for a in channelC],color='red')
+ax2.plot([a*1000./65535. for a in channelD],color='orange')
 ax2.set_title("Terminated Input")
 ax2.set_xlim(0, 2048)
 ax2.set_xlabel('Sample Number (125 Msps)')
@@ -37,8 +43,10 @@ ax = fig.add_subplot(312)
 #bins = np.linspace(-10, 10, 100)
 bins=20
 
-ax.hist(channelA, bins, alpha=0.5, facecolor='green')#, legend='Channel A')
-ax.hist(channelB, bins, alpha=0.5, facecolor='blue')#, legend='Channel B')
+ax.hist(channelA, bins, alpha=0.5, facecolor='green')
+ax.hist(channelB, bins, alpha=0.5, facecolor='blue')
+ax.hist(channelC, bins, alpha=0.5, facecolor='red')
+ax.hist(channelD, bins, alpha=0.5, facecolor='orange')
 #ax.legend(loc='upper right')
 
 #n, bins, patches = ax.hist(channelA, 20, facecolor='green', alpha=0.5)
