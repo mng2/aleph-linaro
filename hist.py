@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
+import windowing as w
 
 channelA = []
 channelB = []
@@ -53,12 +54,15 @@ ax.grid(True)
 ax3 = fig.add_subplot(313)
 
 ps = 10*np.log10(np.abs(np.fft.fft(voltageA))**2 / 50. / 1000.) - 3.0 # dBm
+window = w.blackmanharris(2048)
+pw = 10*np.log10(np.abs(np.fft.fft(voltageA*window))**2 / 50. / 1000.) - 3.0 # dBm
 
 time_step = 1. / 125e6
 freqs = np.fft.fftfreq(len(channelA), time_step)
 idx = np.argsort(freqs)
 
 ax3.plot(freqs[idx], ps[idx],color='green',alpha=0.5)
+ax3.plot(freqs[idx], pw[idx],color='orange',alpha=0.75)
 ax3.set_xlim(0,62.5e6)
 ax3.set_ylabel('Power (dBm)')
 
